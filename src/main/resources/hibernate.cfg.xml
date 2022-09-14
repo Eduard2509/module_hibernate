@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Htbernate Configuration DTD//EN"
+        "http://www.hibernate.Org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">xttvocuwhrudtg</property>
+        <property name="hibernate.connection.password">616e96cc7f69e63cc65b1182befd22fa980ab722a6b3d19a4b6e293ac8920381</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-44-209-158-64.compute-1.amazonaws.com/d8el0m9a1811og</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+
+        <mapping class="com.model.Grade"/>
+        <mapping class="com.model.GroupStudents"/>
+        <mapping class="com.model.Student"/>
+        <mapping class="com.model.Subject"/>
+        <mapping class="com.model.Teacher"/>
+
+    </session-factory>
+</hibernate-configuration>
