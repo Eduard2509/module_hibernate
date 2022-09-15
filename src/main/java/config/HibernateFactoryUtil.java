@@ -1,9 +1,11 @@
 package config;
 
+import org.flywaydb.core.Flyway;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,7 +14,12 @@ import javax.persistence.Persistence;
 public class HibernateFactoryUtil {
 
     private static SessionFactory sessionFactory;
-    private static EntityManager entityManager;
+
+    private HibernateFactoryUtil(){
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+        Flyway flyway = FlywayConfig.getInstance().getFlyway();
+        flyway.migrate();
+    }
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -30,14 +37,4 @@ public class HibernateFactoryUtil {
         }
         return sessionFactory;
     }
-
-    public static EntityManager getEntityManager() {
-        if (entityManager == null) {
-            EntityManagerFactory entityManagerFactory =
-                    Persistence.createEntityManagerFactory("persistence");
-            entityManager = entityManagerFactory.createEntityManager();
-        }
-        return entityManager;
-    }
-
 }

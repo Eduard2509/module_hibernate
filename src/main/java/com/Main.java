@@ -9,6 +9,7 @@ import com.repository.StudentRepository;
 import com.repository.TeacherRepository;
 import com.service.*;
 import com.util.UserInputUtil;
+import config.HibernateFactoryUtil;
 import org.flywaydb.core.Flyway;
 
 import java.time.LocalDate;
@@ -16,6 +17,14 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        HibernateFactoryUtil.getSessionFactory().openSession();
+//        StudentService.getInstance().create();
+//        TeacherService.getInstance().create();
+//        GradeService.getInstance().create();
+//        GroupService.getInstance().create();
+//        grade.setSubject(subject);
+//        grade.setStudent(student);
+//        GradeRepository.getInstance().update(grade);
         Flyway flyway = Flyway.configure()
                 .dataSource( "jdbc:postgresql://ec2-44-209-158-64.compute-1.amazonaws.com/d8el0m9a1811og" ,
                         "xttvocuwhrudtg" ,
@@ -24,13 +33,6 @@ public class Main {
                 .locations("db/migration")
                 .load();
         flyway.migrate();
-//        Student student = StudentService.getInstance().create();
-//        Teacher teacher = TeacherService.getInstance().create();
-//        Subject subject = teacher.getSubject();
-//        Grade grade = GradeService.getInstance().create();
-//        grade.setSubject(subject);
-//        grade.setStudent(student);
-//        GradeRepository.getInstance().update(grade);
 //
 //        Student student1 = new Student(
 //                UUID.randomUUID().toString(), "Igor", "Lachenkov", 22, LocalDate.now());
@@ -60,7 +62,7 @@ public class Main {
 //        GradeRepository.getInstance().update(grade1);
 //        student1.getGrade().setSubject(teacher1.getSubject());
 //        GroupRepository.getInstance().getAverageGradeGroupByName(student.getGroup());
-        StudentService.getInstance().getCountStudentsInGroup();
+//        StudentService.getInstance().getCountStudentsInGroup();
 
 
         final Action[] actions = Action.values();

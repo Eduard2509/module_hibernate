@@ -13,7 +13,6 @@ public class TeacherService {
     private final TeacherRepository repository;
 
     public Teacher create(){
-
         Teacher teacher = new Teacher(UUID.randomUUID().toString(),
                 "Gennadiy", "Kitchenko", 32, SubjectService.getInstance().create());
         repository.save(teacher);
@@ -33,6 +32,6 @@ public class TeacherService {
 
 
     public void getTeacher(String name){
-        System.out.println(repository.getTeacher(name));
+        repository.getTeacher(name).forEach(System.out::println);
     }
 }

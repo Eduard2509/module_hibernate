@@ -4,7 +4,9 @@ import com.model.Teacher;
 import config.HibernateFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import java.util.List;
 import java.util.Optional;
 
 public class TeacherRepository {
@@ -18,20 +20,33 @@ public class TeacherRepository {
         return instance;
     }
 
-    public Teacher getTeacher(String name) {
+    @SuppressWarnings("unchecked")
+    public List<Teacher> getTeacher(String value) {
         final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Optional<Teacher> teacher = session.createQuery(
-                        "from Teacher as p where p.name = :name", Teacher.class)
-                .setParameter("name", name)
-                .uniqueResultOptional();
-        session.close();
-        if (teacher.isEmpty()) {
-            return getTeacherBySurname(name);
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            List<Teacher> teachers = session.createQuery("from Teacher where name = :value or surname = :value")
+                    .setParameter("value", value)
+                    .list();
+            transaction.commit();
+            return teachers;
         }
-        return teacher.get();
     }
+
+//    public Teacher getTeacher(String name) {
+//        final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        Optional<Teacher> teacher = session.createQuery(
+//                        "from Teacher where name = :name", Teacher.class)
+//                .setParameter("name", name)
+//                .uniqueResultOptional();
+////        if (teacher.isEmpty()) {
+////            return getTeacherBySurname(name);
+////        }
+//        session.close();
+//        return teacher.get();
+//    }
 
     public Teacher getTeacherBySurname(String name) {
         final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
