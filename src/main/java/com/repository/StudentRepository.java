@@ -41,12 +41,12 @@ public class StudentRepository {
         SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createSQLQuery("SELECT Student.name, AVG(Grade.value) FROM Student, Grade " +
-                "WHERE Grade.value > :averageGrade AND Grade.student_id = Student.id GROUP BY Student.name, Grade.value")
+        Query query = session.createQuery("select s, AVG(g.value) from Grade g inner join g.student as s " +
+                        "group by s having avg(g.value) >= :averageGrade")
                 .setParameter("averageGrade", averageGrade);
         List<Object[]> list = query.getResultList();
-        Map<String, Double> grouped = new HashMap<>();
-        list.forEach(item -> grouped.put((String) item[0], Double.valueOf(item[1].toString())));
+        Map<Student, Double> grouped = new HashMap<>();
+        list.forEach(item -> grouped.put((Student) item[0], Double.valueOf(item[1].toString())));
         transaction.commit();
         session.close();
         return grouped;

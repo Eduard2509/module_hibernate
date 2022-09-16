@@ -20,13 +20,13 @@ public class TeacherRepository {
         return instance;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Teacher> getTeacher(String value) {
+
+    public List<Teacher> getTeacher(String name) {
         final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
         try(Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            List<Teacher> teachers = session.createQuery("from Teacher where name = :value or surname = :value")
-                    .setParameter("value", value)
+            List<Teacher> teachers = session.createQuery("from Teacher where name = :name or surname = :name")
+                    .setParameter("name", name)
                     .list();
             transaction.commit();
             return teachers;
