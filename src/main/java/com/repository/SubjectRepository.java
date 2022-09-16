@@ -51,9 +51,9 @@ public class SubjectRepository {
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("SELECT SB, AVG(G.value) as AG FROM Grade G " +
                 "INNER JOIN G.subject SB GROUP BY SB ORDER BY AG DESC");
-        List<Object[]> list = query.getResultList();
-        Map<String, Double> grouped = new HashMap<>();
-        list.forEach(item -> grouped.put((String) item[0], Double.valueOf(item[1].toString())));
+        Object[] singleResult = (Object[]) query.setMaxResults(1).getSingleResult();
+        Map<Subject, Double> grouped = new HashMap<>();
+        grouped.put((Subject) singleResult[0], Double.valueOf(singleResult[1].toString()));
         transaction.commit();
         session.close();
         return grouped;
@@ -63,11 +63,11 @@ public class SubjectRepository {
         SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createSQLQuery("SELECT Subject.name , MIN (Grade.value)" +
-                " FROM Grade, Subject group by subject.name");
-        List<Object[]> list = query.getResultList();
-        Map<String, Double> grouped = new HashMap<>();
-        list.forEach(item -> grouped.put((String) item[0], Double.valueOf(item[1].toString())));
+        Query query = session.createQuery("SELECT SB, AVG(G.value) as AG FROM Grade G " +
+                "INNER JOIN G.subject SB GROUP BY SB ORDER BY AG ASC ");
+        Object[] singleResult = (Object[]) query.setMaxResults(1).getSingleResult();
+        Map<Subject, Double> grouped = new HashMap<>();
+        grouped.put((Subject) singleResult[0], Double.valueOf(singleResult[1].toString()));
         transaction.commit();
         session.close();
         return grouped;

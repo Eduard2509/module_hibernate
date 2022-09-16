@@ -17,7 +17,8 @@ public class Teacher {
     private String name;
     private String surname;
     private int age;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     public Teacher(String id, String name, String surname, int age, Subject subject) {

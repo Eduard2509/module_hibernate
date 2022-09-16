@@ -15,8 +15,6 @@ public class Subject {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     private String name;
-    @OneToOne(mappedBy = "subject")
-    private Grade grade;
 
     public Subject(String id, String name) {
         this.id = id;
