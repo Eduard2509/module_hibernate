@@ -20,7 +20,8 @@ public class GroupStudents {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Student> students;
 
-    public GroupStudents(){}
+    public GroupStudents() {
+    }
 
     public GroupStudents(String id, String name) {
         this.id = id;

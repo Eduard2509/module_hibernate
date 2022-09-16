@@ -7,11 +7,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class GroupRepository {
 
@@ -24,25 +22,13 @@ public class GroupRepository {
         return instance;
     }
 
-    public GroupStudents findGroupByFullName(String fullName) {
-        SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        GroupStudents group = (GroupStudents) session.createQuery(
-                        "select p from GroupStudents p where p.name = :name")
-                .setParameter("name", fullName)
-                .uniqueResult();
-        session.close();
-        return group;
-    }
-
     public List findGroupByName(String name) {
         SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List resultList = session.createQuery(
                         "from GroupStudents where name like :name")
-                .setParameter("name","%" + name + "%")
+                .setParameter("name", "%" + name + "%")
                 .getResultList();
         session.close();
         return resultList;
@@ -73,16 +59,6 @@ public class GroupRepository {
         session.beginTransaction();
         session.save(group);
         session.flush();
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
-    public boolean update(GroupStudents groupStudents) {
-        final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(groupStudents);
         session.getTransaction().commit();
         session.close();
         return true;

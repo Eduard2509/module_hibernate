@@ -1,8 +1,6 @@
 package com.service;
 
-import com.model.Subject;
 import com.model.Teacher;
-import com.repository.GroupRepository;
 import com.repository.TeacherRepository;
 
 import java.util.UUID;
@@ -12,7 +10,7 @@ public class TeacherService {
     private static TeacherService instance;
     private final TeacherRepository repository;
 
-    public Teacher create(){
+    public Teacher create() {
         Teacher teacher = new Teacher(UUID.randomUUID().toString(),
                 "Gennadiy", "Kitchenko", 32, SubjectService.getInstance().create());
         repository.save(teacher);
@@ -30,8 +28,7 @@ public class TeacherService {
         return instance;
     }
 
-
-    public void getTeacher(String name){
+    public void getTeacher(String name) {
         repository.getTeacher(name).forEach(System.out::println);
     }
 }

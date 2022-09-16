@@ -1,7 +1,6 @@
 package com.repository;
 
 import com.model.Grade;
-import com.model.GroupStudents;
 import config.HibernateFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,13 +30,4 @@ public class GradeRepository {
         return true;
     }
 
-    public boolean update(Grade grade) {
-        final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(grade);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
 }

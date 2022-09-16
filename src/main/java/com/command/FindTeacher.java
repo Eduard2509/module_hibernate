@@ -4,7 +4,7 @@ import com.service.TeacherService;
 
 import java.util.Scanner;
 
-public class FindTeacher implements Command{
+public class FindTeacher implements Command {
     private static TeacherService groupService = TeacherService.getInstance();
     Scanner scanner = new Scanner(System.in);
 

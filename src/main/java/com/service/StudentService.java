@@ -1,14 +1,12 @@
 package com.service;
 
-import com.model.Grade;
 import com.model.GroupStudents;
 import com.model.Student;
-import com.repository.GradeRepository;
-import com.repository.GroupRepository;
 import com.repository.StudentRepository;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Random;
+import java.util.UUID;
 
 public class StudentService {
 
@@ -28,9 +26,9 @@ public class StudentService {
     }
 
 
-    public Student create(){
+    public Student create() {
         GroupStudents group = GroupService.getInstance().create();
-        Student student = new Student(UUID.randomUUID().toString() ,"Petro", "Herasimov",
+        Student student = new Student(UUID.randomUUID().toString(), "Petro", "Herasimov",
                 random.nextInt(16, 22), LocalDate.now());
         student.setGroup(group);
         repository.save(student);
@@ -42,7 +40,7 @@ public class StudentService {
                 "Count students in group: " + repository.getCountStudentsInGroup());
     }
 
-    public void getStudentMoreAverageGrade(double averageGrade){
+    public void getStudentMoreAverageGrade(double averageGrade) {
         System.out.println(repository.getStudentMoreAverageGrade(averageGrade));
     }
 }

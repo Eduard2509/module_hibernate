@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,12 +25,14 @@ public class Student {
     private GroupStudents group;
 
     @OneToMany(mappedBy = "student",
-                    cascade = CascadeType.PERSIST,
-                    orphanRemoval = true,
-                    fetch = FetchType.EAGER)
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
     private List<Grade> grades;
 
-    public Student(){}
+    public Student() {
+    }
+
     public Student(String id, String name, String surname, int age, LocalDate startDate) {
         this.id = id;
         this.name = name;

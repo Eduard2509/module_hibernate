@@ -1,12 +1,8 @@
 package com.service;
 
-import com.model.Grade;
 import com.model.Subject;
-import com.repository.GradeRepository;
-import com.repository.GroupRepository;
 import com.repository.SubjectRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 public class SubjectService {
@@ -30,7 +26,6 @@ public class SubjectService {
         }
         return instance;
     }
-
 
     public void getSubjectWithLargestGrade() {
         System.out.println(repository.getSubjectWithLargestGrade());

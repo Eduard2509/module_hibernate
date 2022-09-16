@@ -5,7 +5,7 @@ import com.util.UserInputUtil;
 
 import java.util.Scanner;
 
-public class FindGroupByName implements Command{
+public class FindGroupByName implements Command {
     private static GroupService groupService = GroupService.getInstance();
     private static UserInputUtil userInputUtil = new UserInputUtil();
     Scanner scanner = new Scanner(System.in);

@@ -13,8 +13,8 @@ public class FlywayConfig {
 
     private FlywayConfig() {
         flyway = Flyway.configure()
-                .dataSource( "jdbc:postgresql://ec2-44-209-158-64.compute-1.amazonaws.com/d8el0m9a1811og" ,
-                        "xttvocuwhrudtg" ,
+                .dataSource("jdbc:postgresql://ec2-44-209-158-64.compute-1.amazonaws.com/d8el0m9a1811og",
+                        "xttvocuwhrudtg",
                         "616e96cc7f69e63cc65b1182befd22fa980ab722a6b3d19a4b6e293ac8920381")
                 .baselineOnMigrate(true)
                 .locations("db/migration")

@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -32,12 +31,13 @@ public class Grade {
         this.value = value;
     }
 
-    public Grade(String id, int value){
+    public Grade(String id, int value) {
         this.id = id;
         this.value = value;
     }
 
-    public Grade(){}
+    public Grade() {
+    }
 
     @Override
     public String toString() {

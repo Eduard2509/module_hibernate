@@ -1,12 +1,10 @@
 package com.command;
 
 import com.service.StudentService;
-import com.util.UserInputUtil;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Scanner;
 
-public class StudentMoreAverageGrade implements Command{
+public class StudentMoreAverageGrade implements Command {
     private static StudentService studentService = StudentService.getInstance();
     Scanner scanner = new Scanner(System.in);
 

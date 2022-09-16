@@ -1,13 +1,9 @@
 package com.service;
 
 import com.model.Grade;
-import com.model.Student;
-import com.model.Subject;
 import com.repository.GradeRepository;
-import com.repository.GroupRepository;
 
 import java.util.Random;
-import java.util.Set;
 import java.util.UUID;
 
 public class GradeService {

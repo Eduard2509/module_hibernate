@@ -29,7 +29,8 @@ public class Teacher {
         this.subject = subject;
     }
 
-    public Teacher(){}
+    public Teacher() {
+    }
 
     @Override
     public String toString() {
